@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Project Nemesis</title>
+<link rel="icon" type="image/png" href="/assets/nemesis/nemesis-berserk.png">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #0a0a0f; color: #e0e0e0; font-family: system-ui, sans-serif;
+  min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;
+}
+.container { max-width: 500px; }
+.error-code { font-family: 'Press Start 2P', monospace; font-size: 72px; color: #ff3366; margin-bottom: 20px; text-shadow: 0 0 40px rgba(255,51,102,0.3); }
+h1 { font-family: 'Press Start 2P', monospace; font-size: 14px; color: #fff; margin-bottom: 16px; letter-spacing: 2px; }
+p { color: #888899; font-size: 15px; margin-bottom: 30px; line-height: 1.7; }
+.nemesis-sprite { font-size: 80px; margin-bottom: 20px; animation: float 2s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+a {
+  display: inline-block; font-family: 'Press Start 2P', monospace; font-size: 11px;
+  color: #fff; background: #ff3366; border: 2px solid #ff3366; padding: 14px 32px;
+  text-decoration: none; letter-spacing: 2px; transition: all 0.3s;
+}
+a:hover { background: transparent; color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.4); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="nemesis-sprite">👾</div>
+  <div class="error-code">404</div>
+  <h1>PÁGINA NO ENCONTRADA</h1>
+  <p>Nemesis no encontró lo que buscas. El bucle te trajo aquí, pero puedes volver al inicio.</p>
+  <a href="/">VOLVER AL INICIO</a>
+</div>
+</body>
+</html>

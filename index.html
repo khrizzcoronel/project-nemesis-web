@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="hero.title">Project Nemesis — Juego de Pelea con IA Adaptativa</title>
+<meta name="description" content="Project Nemesis es un juego de pelea 2D donde una IA adaptativa aprende de tus movimientos y evoluciona combate tras combate.">
+<meta property="og:title" content="Project Nemesis — IA Adaptativa en Combate">
+<meta property="og:description" content="Enfréntate a Nemesis, una IA que aprende de ti. Pelea, evolución y estrategia en tu navegador.">
+<meta property="og:image" content="/assets/nemesis/nemesis-berserk.png">
+<meta property="og:url" content="https://project-nemesis.vercel.app">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Project Nemesis — IA Adaptativa">
+<meta name="twitter:description" content="Un juego de pelea 2D con IA que aprende de tus movimientos.">
+<meta name="twitter:image" content="/assets/nemesis/nemesis-berserk.png">
+<link rel="icon" type="image/png" href="/assets/nemesis/nemesis-berserk.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Project Nemesis",
+  "description": "Juego de pelea 2D con IA adaptativa que aprende del jugador.",
+  "genre": ["Fighting", "Action"],
+  "platform": ["Web"],
+  "applicationCategory": "Game",
+  "operatingSystem": "Any",
+  "author": { "@type": "Person", "name": "Project Nemesis Team" },
+  "version": "1.0.0-beta"
+}
+</script>
+</head>
+<body>
+
+<nav class="nav-bar" id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">PN</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#jugar" data-i18n="nav.jugar">Jugar</a></li>
+      <li><a href="#historia" data-i18n="nav.historia">Historia</a></li>
+      <li><a href="#personajes" data-i18n="nav.personajes">Personajes</a></li>
+      <li><a href="#tecnicas" data-i18n="nav.tecnico">Técnico</a></li>
+      <li><a href="#galeria" data-i18n="nav.galeria">Galería</a></li>
+      <li><a href="#trivia" data-i18n="nav.trivia">Trivia</a></li>
+    </ul>
+    <div class="nav-actions">
+      <label class="theme-switch" aria-label="Toggle theme">
+        <input type="checkbox" id="themeToggle">
+        <span class="slider"></span>
+      </label>
+      <button id="langToggle" class="icon-btn lang-btn" aria-label="Toggle language"><img id="langFlag" class="flag-icon" src="assets/icons/flags/ec.svg" alt=""> ES</button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú">&#9776;</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <canvas id="particlesCanvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge" data-i18n="hero.badge">VERSIÓN BETA</div>
+    <h1 class="hero-title" data-i18n="hero.title">PROJECT<br>NEMESIS</h1>
+    <p class="hero-subtitle" data-i18n="hero.subtitle">Un juego de pelea 2D con IA que aprende de ti</p>
+    <div class="hero-actions">
+      <a href="#jugar" class="btn-primary" data-i18n="hero.cta_play">JUGAR AHORA</a>
+      <a href="#historia" class="btn-secondary" data-i18n="hero.cta_more">CONOCER MÁS</a>
+    </div>
+    <div class="hero-tech" id="heroTech"></div>
+  </div>
+  <div class="hero-bg-art">
+    <img src="assets/nemesis/nemesis-berserk.png" alt="Nemesis" class="hero-bg-img">
+  </div>
+  <div class="scroll-indicator">▼</div>
+</section>
+
+<section class="section section-play" id="jugar">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="jugar.label">SECCIÓN 01</div>
+    <h2 class="section-title" data-i18n="jugar.title">JUGAR AHORA</h2>
+    <p class="section-desc" data-i18n="jugar.desc">Versión beta. Nemesis está lista. ¿Tú lo estás?</p>
+    <div class="beta-badge-container">
+      <span class="beta-badge-sub" data-i18n="jugar.badge_sub">El juego se encuentra en desarrollo activo. Algunas características visuales son provisionales.</span>
+    </div>
+    <div class="game-wrapper">
+      <div class="game-container" id="gameContainer">
+        <div class="game-loader" id="gameLoader">
+          <div class="loader-spinner"></div>
+          <span data-i18n="jugar.loading">Cargando juego...</span>
+        </div>
+        <iframe id="gameIframe"
+          data-src="JUEGO_URL"
+          allow="fullscreen"
+          sandbox="allow-scripts allow-same-origin"
+          loading="lazy"
+          title="Project Nemesis - Jugar">
+        </iframe>
+      </div>
+      <div class="game-controls-bar">
+        <button id="fullscreenBtn" class="control-btn" data-i18n="jugar.fullscreen">⛶ Pantalla completa</button>
+        <button id="reloadBtn" class="control-btn" data-i18n="jugar.reload">↻ Reiniciar</button>
+      </div>
+    </div>
+      <div class="controls-info">
+        <h3 data-i18n="jugar.controls_title">Controles</h3>
+        <div class="controls-grid" id="controlsGrid"></div>
+      </div>
+  </div>
+</section>
+
+<section class="section section-story" id="historia">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="historia.label">SECCIÓN 02</div>
+    <h2 class="section-title" data-i18n="historia.title">HISTORIA</h2>
+    <div class="story-content">
+      <div class="story-text">
+        <p data-i18n="historia.p1">El mundo fue condenado a un bucle eterno. El Lich desató un caos sin fin, atrapando a todos los habitantes en un ciclo interminable de destrucción.</p>
+        <p data-i18n="historia.p2">Pero en las sombras del loop, algo comenzó a despertar. Nemesis no es un enemigo común. Observa. Estudia. Aprende.</p>
+        <p data-i18n="historia.p3">Cada golpe que le asestas, cada combo que ejecutas, cada estrategia que empleas — Nemesis lo registra todo. Combate tras combate, se vuelve más inteligente, más impredecible, más peligrosa.</p>
+        <p class="story-emphasis" data-i18n="historia.emphasis">La dificultad no viene de estadísticas infladas. Viene del comportamiento. Nemesis te superará porque te conoce.</p>
+      </div>
+      <div class="story-visual">
+        <img src="assets/nemesis/nemesis-final-form.png" alt="Nemesis final form" class="story-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-characters" id="personajes">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="personajes.label">SECCIÓN 03</div>
+    <h2 class="section-title" data-i18n="personajes.title">PERSONAJES</h2>
+    <div class="chars-showcase">
+      <div class="char-showcase-card">
+        <div class="char-showcase-visual">
+          <img src="assets/player/player-idle.gif" alt="Player" class="char-showcase-sprite-big" id="charPlayerImg">
+          <div class="char-showcase-tabs">
+            <button class="char-tab active" data-char="player" data-img="assets/player/player-idle.gif">Idle</button>
+            <button class="char-tab" data-char="player" data-img="assets/player/player-walk.gif">Walk</button>
+            <button class="char-tab" data-char="player" data-img="assets/player/player-jump.gif">Jump</button>
+            <button class="char-tab" data-char="player" data-img="assets/player/player-attack.png">Attack</button>
+          </div>
+        </div>
+        <div class="char-showcase-info">
+          <h3 class="char-name" data-i18n="personajes.player.name">EL GUERRERO</h3>
+          <span class="char-role" data-i18n="personajes.player.role">Protagonista</span>
+          <p class="char-desc" data-i18n="personajes.player.desc">Un guerrero decidido a romper el bucle. Controlado por el jugador, su fuerza radica en la adaptabilidad y la estrategia humana.</p>
+          <ul class="char-stats">
+            <li><span data-i18n="personajes.player.stats.hp">HP</span><span>100</span></li>
+            <li><span data-i18n="personajes.player.stats.speed">Velocidad</span><span>180 px/s</span></li>
+            <li><span data-i18n="personajes.player.stats.atk">Daño rápido</span><span>10</span></li>
+            <li><span data-i18n="personajes.player.stats.spec">Daño especial</span><span>25</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="char-showcase-card char-showcase-card--nemesis">
+        <div class="char-showcase-visual">
+          <img src="assets/nemesis/nemesis-walk.gif" alt="Nemesis" class="char-showcase-sprite-big" id="charNemesisImg">
+          <div class="char-showcase-tabs">
+            <button class="char-tab active" data-char="nemesis" data-img="assets/nemesis/nemesis-walk.gif">Normal</button>
+            <button class="char-tab" data-char="nemesis" data-img="assets/nemesis/nemesis-berserk-idle.png">Berserk</button>
+            <button class="char-tab" data-char="nemesis" data-img="assets/nemesis/nemesis-attack.gif">Ataque</button>
+            <button class="char-tab" data-char="nemesis" data-img="assets/nemesis/nemesis-jump.gif">Salto</button>
+          </div>
+        </div>
+        <div class="char-showcase-info">
+          <h3 class="char-name char-name--nemesis" data-i18n="personajes.nemesis.name">NEMESIS</h3>
+          <span class="char-role" data-i18n="personajes.nemesis.role">IA Adaptativa</span>
+          <p class="char-desc" data-i18n="personajes.nemesis.desc">Una inteligencia artificial que evoluciona. Cada derrota la vuelve más fuerte. Cada victoria tuya la hace más cautelosa. Nunca lucha igual dos veces.</p>
+          <ul class="char-stats">
+            <li><span data-i18n="personajes.player.stats.hp">HP</span><span>100</span></li>
+            <li><span data-i18n="personajes.player.stats.speed">Velocidad</span><span>180 px/s</span></li>
+            <li><span data-i18n="personajes.player.stats.atk">Daño rápido</span><span>12</span></li>
+            <li><span data-i18n="personajes.player.stats.spec">Daño especial</span><span>29</span></li>
+          </ul>
+          <div class="char-abilities">
+            <h4 data-i18n="personajes.nemesis.berserk_title">Ataques exclusivos (Berserk)</h4>
+            <ul>
+              <li><strong>Crimson Impaler</strong> — <span data-i18n="personajes.nemesis.berserk.0.desc">Dash letal a distancia</span></li>
+              <li><strong>Neuro Storm</strong> — <span data-i18n="personajes.nemesis.berserk.1.desc">Ráfaga de 5 golpes en melé</span></li>
+              <li><strong>Synaptic Collapse</strong> — <span data-i18n="personajes.nemesis.berserk.2.desc">AoE que rompe bloqueo</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tech" id="tecnicas">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="tecnicas.label">SECCIÓN 04</div>
+    <h2 class="section-title" data-i18n="tecnicas.title">CARACTERÍSTICAS TÉCNICAS</h2>
+    <div class="tech-grid" id="techGrid"></div>
+  </div>
+</section>
+
+<section class="section section-tools" id="herramientas">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="techtools.label">SECCIÓN 05</div>
+    <h2 class="section-title" data-i18n="techtools.title">TECNOLOGÍAS Y HERRAMIENTAS</h2>
+    <p class="section-desc" data-i18n="techtools.desc">El stack técnico que hace posible Project Nemesis</p>
+    <div class="tools-grid" id="toolsGrid"></div>
+  </div>
+</section>
+
+<section class="section section-algorithms" id="algoritmos">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="algoritmos.label">SECCIÓN 06</div>
+    <h2 class="section-title" data-i18n="algoritmos.title">ALGORITMOS DESTACADOS</h2>
+    <div class="accordion" id="algoAccordion"></div>
+  </div>
+</section>
+
+<section class="section section-status" id="estado">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="estado.label">SECCIÓN 07</div>
+    <h2 class="section-title" data-i18n="estado.title">ESTADO DEL DESARROLLO</h2>
+    <div class="progress-bar-container">
+      <div class="progress-label"><span data-i18n="estado.progress_label">Progreso general</span>: <span id="progressPercent">55%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:55%"></div></div>
+    </div>
+    <div id="statusGrid"></div>
+  </div>
+</section>
+
+<section class="section section-gallery" id="galeria">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="galeria.label">SECCIÓN 08</div>
+    <h2 class="section-title" data-i18n="galeria.title">GALERÍA DE PERSONAJES</h2>
+    <p class="section-desc" data-i18n="galeria.desc">Explora las animaciones y diseños de los personajes del juego.</p>
+    <div class="gallery-tabs" id="galleryTabs"></div>
+    <div class="gallery-grids" id="galleryGrids"></div>
+  </div>
+</section>
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close">&times;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+</div>
+
+<section class="section section-roadmap" id="roadmap">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="roadmap.label">SECCIÓN 09</div>
+    <h2 class="section-title" data-i18n="roadmap.title">ROADMAP</h2>
+    <div class="timeline-snake" id="timeline"></div>
+  </div>
+</section>
+
+<section class="section section-changelog" id="changelog">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="changelog.label">SECCIÓN 10</div>
+    <h2 class="section-title" data-i18n="changelog.title">CHANGELOG</h2>
+    <div class="changelog-grid" id="changelogList"></div>
+  </div>
+</section>
+
+<section class="section section-trivia" id="trivia">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="trivia.label">SECCIÓN 11</div>
+    <h2 class="section-title" data-i18n="trivia.title">🧠 TRIVIA</h2>
+    <p class="section-desc" data-i18n="trivia.desc">Pon a prueba cuánto sabes sobre Project Nemesis</p>
+    <div class="quiz-container" id="quiz">
+      <div class="quiz-start" id="quizStart">
+        <div class="quiz-start-icon">?</div>
+        <p data-i18n="trivia.start_text">10 preguntas sobre el juego, la IA, los algoritmos y la historia.</p>
+        <button class="btn-primary" id="quizStartBtn" data-i18n="trivia.start_btn">COMENZAR</button>
+      </div>
+      <div class="quiz-active hidden" id="quizActive">
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar" id="quizProgressBar"></div>
+          <span id="quizCounter">1 / 10</span>
+        </div>
+        <div class="quiz-question" id="quizQuestion"></div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-nav"><button class="btn-secondary" id="quizPrev">◀ Anterior</button><button class="btn-primary" id="quizNext">Siguiente ▶</button></div>
+      </div>
+      <div class="quiz-result hidden" id="quizResult">
+        <div class="result-icon" id="resultIcon">🏆</div>
+        <div class="result-title" id="resultTitle">¡Maestro!</div>
+        <div class="result-score" id="resultScore">10 / 10</div>
+        <div class="result-pct" id="resultPct">100%</div>
+        <p class="result-msg" id="resultMsg"></p>
+        <div class="result-errors hidden" id="resultErrors">
+          <h3 data-i18n="trivia.errors_title">Repaso de errores</h3>
+          <div id="errorsList"></div>
+        </div>
+        <button class="btn-primary" id="quizRetry" data-i18n="trivia.retry">REINTENTAR</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section section-community" id="comunidad">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="community.label">SECCIÓN 12</div>
+    <h2 class="section-title" data-i18n="community.title">COMUNIDAD Y REDES</h2>
+    <p class="section-desc" data-i18n="community.desc">Sigue el desarrollo, contribuye al código y sé parte de Project Nemesis.</p>
+    <div class="community-grid">
+      <a href="https://github.com" target="_blank" rel="noopener" class="community-card">
+        <img class="community-icon" src="assets/icons/community/github.svg" alt="GitHub">
+        <h3>GitHub</h3>
+        <p data-i18n="community.repo_desc">Repositorio oficial del proyecto. Código abierto, contribuciones bienvenidas.</p>
+      </a>
+      <a href="https://twitter.com" target="_blank" rel="noopener" class="community-card">
+        <img class="community-icon" src="assets/icons/community/twitter.svg" alt="Twitter / X">
+        <h3>Twitter / X</h3>
+        <p data-i18n="community.twitter_desc">Sigue el desarrollo en tiempo real y sé el primero en enterarte de novedades.</p>
+      </a>
+      <a href="mailto:team@projectnemesis.dev" class="community-card">
+        <img class="community-icon" src="assets/icons/community/email.svg" alt="Email">
+        <h3>Email</h3>
+        <p data-i18n="community.email_desc">¿Preguntas, sugerencias o solo quieres saludar? Escríbenos.</p>
+      </a>
+    </div>
+    <div class="community-invite">
+      <h3 data-i18n="community.invite">¿Quieres contribuir?</h3>
+      <p data-i18n="community.invite_desc">Project Nemesis es un proyecto abierto. Si eres desarrollador, diseñador o entusiasta de los juegos de pelea, tu ayuda es bienvenida.</p>
+      <a href="https://github.com" target="_blank" rel="noopener" class="btn-primary" data-i18n="community.invite_cta">CONTRIBUIR EN GITHUB</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="footer-logo">PROJECT NEMESIS</span><span class="footer-version">v1.0.0-beta</span></div>
+    <div class="footer-tech"><span data-i18n="footer.tech">Hecho con</span> <a href="https://phaser.io" target="_blank" rel="noopener">Phaser 4</a> <span>+</span> <a href="https://vitejs.dev" target="_blank" rel="noopener">Vite</a> <span>+</span> <span>JavaScript</span></div>
+    <div class="footer-links">
+      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://twitter.com" target="_blank" rel="noopener">Twitter / X</a>
+      <a href="mailto:team@projectnemesis.dev">Contacto</a>
+    </div>
+    <div class="footer-powered" data-i18n="footer.powered">Powered by Vercel</div>
+  </div>
+</footer>
+
+<a href="#hero" id="backToTop" class="back-to-top material-icons" aria-label="Volver arriba">keyboard_double_arrow_up</a>
+
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
