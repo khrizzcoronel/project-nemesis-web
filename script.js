@@ -1,5 +1,5 @@
 const SITE_CONFIG = {
-  gameUrl: 'JUEGO_URL',
+  gameUrl: 'http://localhost:5173/',
   version: '1.0.0-beta',
   social: {
     github: 'https://github.com',
