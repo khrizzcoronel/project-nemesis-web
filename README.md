@@ -225,7 +225,7 @@ Los assets visuales (sprites, logos) pertenecen a sus respectivos autores.
   ╚═══════════════════════════════════════════╝
 ```
 
-_**Project Nemesis**_ — [Repositorio](https://github.com/your-org/project-nemesis)  
+_**Project Nemesis**_ — [Repositorio](https://github.com/khrizzcoronel/project-nemesis-web)  
 📧 team@projectnemesis.dev
 
 </div>

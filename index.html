@@ -14,7 +14,7 @@
 <meta name="twitter:title" content="Project Nemesis — IA Adaptativa">
 <meta name="twitter:description" content="Un juego de pelea 2D con IA que aprende de tus movimientos.">
 <meta name="twitter:image" content="/assets/nemesis/nemesis-berserk.png">
-<link rel="icon" type="image/png" href="/assets/nemesis/nemesis-berserk.png">
+<link rel="icon" type="image/png" href="assets/icons/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -39,7 +39,7 @@
 
 <nav class="nav-bar" id="navbar">
   <div class="nav-inner">
-    <a href="#hero" class="nav-logo">PN</a>
+    <a href="#hero" class="nav-logo"><img class="nav-logo-img" src="assets/icons/logo.png" alt="Project Nemesis"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#jugar" data-i18n="nav.jugar">Jugar</a></li>
       <li><a href="#historia" data-i18n="nav.historia">Historia</a></li>
@@ -299,29 +299,24 @@
 <section class="section section-community" id="comunidad">
   <div class="section-inner">
     <div class="section-label" data-i18n="community.label">SECCIÓN 12</div>
-    <h2 class="section-title" data-i18n="community.title">COMUNIDAD Y REDES</h2>
-    <p class="section-desc" data-i18n="community.desc">Sigue el desarrollo, contribuye al código y sé parte de Project Nemesis.</p>
+    <h2 class="section-title" data-i18n="community.title">COLABORADORES</h2>
+    <p class="section-desc" data-i18n="community.desc">Conoce al equipo detrás de Project Nemesis.</p>
     <div class="community-grid">
-      <a href="https://github.com" target="_blank" rel="noopener" class="community-card">
-        <img class="community-icon" src="assets/icons/community/github.svg" alt="GitHub">
-        <h3>GitHub</h3>
-        <p data-i18n="community.repo_desc">Repositorio oficial del proyecto. Código abierto, contribuciones bienvenidas.</p>
-      </a>
-      <a href="https://twitter.com" target="_blank" rel="noopener" class="community-card">
-        <img class="community-icon" src="assets/icons/community/twitter.svg" alt="Twitter / X">
-        <h3>Twitter / X</h3>
-        <p data-i18n="community.twitter_desc">Sigue el desarrollo en tiempo real y sé el primero en enterarte de novedades.</p>
-      </a>
-      <a href="mailto:team@projectnemesis.dev" class="community-card">
-        <img class="community-icon" src="assets/icons/community/email.svg" alt="Email">
-        <h3>Email</h3>
-        <p data-i18n="community.email_desc">¿Preguntas, sugerencias o solo quieres saludar? Escríbenos.</p>
-      </a>
+      <div class="community-card community-card-person">
+        <img class="community-person-img" src="assets/avatares/rey.png" alt="Rey">
+        <h3>Khriz Coronel</h3>
+        <p data-i18n="community.khriz">Landing page y documentación</p>
+      </div>
+      <div class="community-card community-card-person">
+        <img class="community-person-img" src="assets/avatares/pato.png" alt="Pato">
+        <h3>Darwin Sanchez</h3>
+        <p data-i18n="community.darwin">Desarrollo de videojuego</p>
+      </div>
     </div>
     <div class="community-invite">
       <h3 data-i18n="community.invite">¿Quieres contribuir?</h3>
       <p data-i18n="community.invite_desc">Project Nemesis es un proyecto abierto. Si eres desarrollador, diseñador o entusiasta de los juegos de pelea, tu ayuda es bienvenida.</p>
-      <a href="https://github.com" target="_blank" rel="noopener" class="btn-primary" data-i18n="community.invite_cta">CONTRIBUIR EN GITHUB</a>
+      <a href="https://github.com/khrizzcoronel/project-nemesis-web" target="_blank" rel="noopener" class="btn-primary" data-i18n="community.invite_cta">CONTRIBUIR EN GITHUB</a>
     </div>
   </div>
 </section>
@@ -331,7 +326,7 @@
     <div class="footer-brand"><span class="footer-logo">PROJECT NEMESIS</span><span class="footer-version">v1.0.0-beta</span></div>
     <div class="footer-tech"><span data-i18n="footer.tech">Hecho con</span> <a href="https://phaser.io" target="_blank" rel="noopener">Phaser 4</a> <span>+</span> <a href="https://vitejs.dev" target="_blank" rel="noopener">Vite</a> <span>+</span> <span>JavaScript</span></div>
     <div class="footer-links">
-      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/khrizzcoronel/project-nemesis-web" target="_blank" rel="noopener">GitHub</a>
       <a href="https://twitter.com" target="_blank" rel="noopener">Twitter / X</a>
       <a href="mailto:team@projectnemesis.dev">Contacto</a>
     </div>

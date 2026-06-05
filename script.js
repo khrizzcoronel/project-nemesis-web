@@ -103,52 +103,125 @@ function renderToolsGrid() {
   const grid = document.getElementById('toolsGrid');
   if (!grid) return;
   const items = t('techtools.tools');
-  grid.innerHTML = items.map(item => `
+  grid.innerHTML = items.map(item => {
+    const techClass = item.title.toLowerCase().replace(/[\s.+]+/g, '-').replace(/[^a-z0-9-]/g, '');
+    return `
     <div class="tools-card">
-      <div class="tools-icon"><img src="${item.iconSrc}" alt="${item.title}" class="tools-svg"></div>
+      <div class="tools-icon" data-tech="${techClass}"><img src="${item.iconSrc}" alt="${item.title}" class="tools-svg"></div>
       <h3>${item.title}</h3>
       <p>${item.desc}</p>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 function renderAlgoAccordion() {
   const acc = document.getElementById('algoAccordion');
   if (!acc) return;
   const items = t('algoritmos.items');
-  acc.innerHTML = items.map(item => {
+
+  const COLORS = ['#6644ff', '#f59e0b', '#00d4ff', '#00cc66'];
+
+  acc.innerHTML = items.map((item, i) => {
+    const color = COLORS[i];
     let extra = '';
+
     if (item.table) {
-      extra = `<div class="frustration-table">
-        <div class="frustration-row">${item.table.headers.map(h => `<span>${h}</span>`).join('')}</div>
-        <div class="frustration-row">${item.table.values.map(v => `<span>${v}</span>`).join('')}</div>
+      const vals = item.table.values.slice(1);
+      const barColors = ['#00cc66', '#a3e635', '#f59e0b', '#ef4444'];
+      extra = `<div class="algo-table">
+        <div class="algo-table-row algo-table-header">
+          ${item.table.headers.map(h => `<span>${h}</span>`).join('')}
+        </div>
+        <div class="algo-table-row algo-table-values">
+          <span>${item.table.values[0]}</span>
+          ${vals.map((v, vi) => `
+            <span class="algo-bar-cell">
+              <span class="algo-bar" style="width:${parseFloat(v) * 100}%;background:${barColors[vi]}"></span>
+              <span class="algo-bar-label">${v}</span>
+            </span>
+          `).join('')}
+        </div>
       </div>`;
     }
+
     if (item.policies) {
-      extra = `<div class="policies-grid">${item.policies.map(p => `
-        <div class="policy-card"><strong>${p.name}</strong><p>${p.desc}</p></div>
-      `).join('')}</div>`;
+      const policyIcons = { Replace: 'swap_horiz', Refresh: 'refresh', Stack: 'layers' };
+      const policyColors = { Replace: '#00d4ff', Refresh: '#f59e0b', Stack: '#6644ff' };
+      extra = `<div class="algo-policies">
+        ${item.policies.map(p => `
+          <div class="algo-policy" style="border-color:${policyColors[p.name]}">
+            <span class="material-icons algo-policy-icon" style="color:${policyColors[p.name]}">${policyIcons[p.name]}</span>
+            <div>
+              <strong style="color:${policyColors[p.name]}">${p.name}</strong>
+              <p>${p.desc}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
     }
+
     if (item.tags) {
-      extra = item.tags.map(t => `
-        <div class="algo-detail">
-          <span class="algo-tag">${t.label}</span>
-          <code>${t.highlight ? `<span class="highlight">${t.code}</span>` : t.code}</code>
-        </div>
-      `).join('');
+      extra = `<div class="algo-tags">
+        ${item.tags.map(t => `
+          <div class="algo-tag-item">
+            <span class="algo-tag-label">${t.label}</span>
+            <code class="${t.highlight ? 'algo-code-highlight' : ''}">${t.code}</code>
+          </div>
+        `).join('')}
+      </div>`;
     }
-    return `<div class="accordion-item">
+
+    return `<div class="accordion-item" style="--accent:${color}">
       <button class="accordion-header">
-        <span class="accordion-num">${item.num}</span>
+        <span class="accordion-badge">${item.num}</span>
+        <span class="material-icons accordion-icon">${item.icon}</span>
         <span class="accordion-title">${item.title}</span>
-        <span class="accordion-arrow">▾</span>
+        <span class="material-icons accordion-arrow">expand_more</span>
       </button>
-      <div class="accordion-body"><p>${item.desc}</p>${extra}</div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p class="algo-desc">${item.desc}</p>
+          ${extra}
+        </div>
+      </div>
     </div>`;
   }).join('');
 
-  document.querySelectorAll('.accordion-header').forEach(h => {
-    h.addEventListener('click', () => h.parentElement.classList.toggle('open'));
+  setupAlgoAccordion();
+}
+
+function setupAlgoAccordion() {
+  document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      const body = item.querySelector('.accordion-body');
+      const content = body.querySelector('.accordion-content');
+      const isOpen = item.classList.contains('open');
+
+      document.querySelectorAll('.accordion-item.open').forEach(openItem => {
+        if (openItem !== item) {
+          const ob = openItem.querySelector('.accordion-body');
+          openItem.classList.remove('open');
+          ob.style.height = '0px';
+        }
+      });
+
+      if (isOpen) {
+        item.classList.remove('open');
+        body.style.height = '0px';
+      } else {
+        item.classList.add('open');
+        body.style.height = content.scrollHeight + 'px';
+      }
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.accordion-item.open').forEach(item => {
+      const body = item.querySelector('.accordion-body');
+      const content = body.querySelector('.accordion-content');
+      body.style.height = content.scrollHeight + 'px';
+    });
   });
 }
 
@@ -159,8 +232,14 @@ function renderDevNodes() {
   const count = items.length;
   const isMobile = window.innerWidth < 768;
   const isTablet = window.innerWidth < 1024;
-  const centerR = isMobile ? 26 : isTablet ? 32 : 38;
+  const centerR = isMobile ? 30 : isTablet ? 37 : 44;
   const angleStep = (2 * Math.PI) / count;
+
+  const ICONS = {
+    done: `<svg viewBox="0 0 32 32" width="28" height="28"><circle cx="16" cy="16" r="14" fill="none" stroke="#00cc66" stroke-width="2.5"/><path d="M10 16l4 4 8-8" fill="none" stroke="#00cc66" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    wip: `<svg viewBox="0 0 32 32" width="28" height="28"><circle cx="16" cy="16" r="14" fill="none" stroke="var(--accent-orange)" stroke-width="2.5"/><path d="M16 8v8l6 4" fill="none" stroke="var(--accent-orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="16" r="3" fill="var(--accent-orange)"/></svg>`,
+    pending: `<svg viewBox="0 0 32 32" width="28" height="28"><circle cx="16" cy="16" r="14" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="4 3"/><circle cx="16" cy="16" r="4" fill="none" stroke="var(--text-muted)" stroke-width="1.5"/></svg>`
+  };
 
   let svgLines = '';
   let nodesHtml = '';
@@ -170,9 +249,8 @@ function renderDevNodes() {
     const x = 50 + centerR * Math.cos(angle);
     const y = 50 + centerR * Math.sin(angle);
     nodesHtml += `<div class="star-node status-${item.status}" style="--sx:${x.toFixed(2)}%;--sy:${y.toFixed(2)}%">
-      <div class="star-node-icon">${item.icon}</div>
+      <div class="star-node-icon">${ICONS[item.status]}</div>
       <strong>${item.title}</strong>
-      <span>${item.desc}</span>
     </div>`;
     svgLines += `<line x1="50%" y1="50%" x2="${x.toFixed(2)}%" y2="${y.toFixed(2)}%" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="4 3"/>`;
   });
@@ -192,7 +270,6 @@ function renderDevNodes() {
     <div class="star-map">
       <svg class="star-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">${svgLines}</svg>
       <div class="star-center">
-        <div class="star-center-icon">✦</div>
         <h3>PROJECT<br>NEMESIS</h3>
       </div>
       ${nodesHtml}

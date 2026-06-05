@@ -3,7 +3,7 @@ const LANG = {
     nav: { jugar: 'Jugar', historia: 'Historia', personajes: 'Personajes', tecnico: 'Técnico', galeria: 'Galería', trivia: 'Trivia' },
     hero: {
       badge: 'VERSIÓN BETA',
-      title: 'PROJECT<br>NEMESIS',
+      title: 'PROJECT NEMESIS',
       subtitle: 'Un juego de pelea 2D con IA que aprende de ti',
       cta_play: 'JUGAR AHORA',
       cta_more: 'CONOCER MÁS',
@@ -81,7 +81,7 @@ const LANG = {
       title: 'ALGORITMOS DESTACADOS',
       items: [
         {
-          num: '01', title: 'PatternDetector — Clasificación de Perfiles',
+          num: '01', icon: 'manage_search', title: 'PatternDetector (Clasificación de Perfiles)',
           desc: 'Analiza el comportamiento del jugador en tiempo real y lo clasifica en perfiles tácticos: agresivo, defensivo, equilibrado, impredecible. Nemesis ajusta su estrategia base según el perfil detectado.',
           tags: [
             { label: 'Entrada', code: 'Acciones del jugador (últimos 5 segundos)' },
@@ -89,12 +89,12 @@ const LANG = {
           ]
         },
         {
-          num: '02', title: 'FrustrationRegulator — Balance Dinámico',
+          num: '02', icon: 'speed', title: 'FrustrationRegulator (Balance Dinámico)',
           desc: 'Si el jugador pierde repetidamente, Nemesis se contiene para mantener la experiencia desafiante pero justa.',
           table: { headers: ['Derrotas', '0-1', '2', '3', '4+'], values: ['Intensidad', '1.0', '0.7', '0.5', '0.35'] }
         },
         {
-          num: '03', title: 'AdaptiveMomentum — Ventana Deslizante',
+          num: '03', icon: 'trending_up', title: 'AdaptiveMomentum (Ventana Deslizante)',
           desc: 'Monitorea las últimas 40 acciones del jugador. Si detecta abuso de una táctica, Nemesis incrementa su probabilidad de contraatacar o esquivar.',
           tags: [
             { label: 'Umbral', code: 'momentum > 0.6 → IA prioriza defensa', highlight: true },
@@ -102,7 +102,7 @@ const LANG = {
           ]
         },
         {
-          num: '04', title: 'StatusEffect — Políticas de Stack',
+          num: '04', icon: 'layers', title: 'StatusEffect (Políticas de Stack)',
           desc: 'Tres reglas de acumulación para buffs y debuffs que determinan cómo se combinan los efectos de estado.',
           policies: [
             { name: 'Replace', desc: 'El nuevo efecto reemplaza al existente solo si su prioridad es mayor o igual.' },
@@ -223,11 +223,11 @@ const LANG = {
     },
     community: {
       label: 'SECCIÓN 12',
-      title: 'COMUNIDAD Y REDES',
-      desc: 'Sigue el desarrollo, contribuye al código y sé parte de Project Nemesis.',
-      repo_desc: 'Repositorio oficial del proyecto. Código abierto, contribuciones bienvenidas.',
-      twitter_desc: 'Sigue el desarrollo en tiempo real y sé el primero en enterarte de novedades.',
-      email_desc: '¿Preguntas, sugerencias o solo quieres saludar? Escríbenos.',
+      title: 'COLABORADORES',
+      desc: 'Conoce al equipo detrás de Project Nemesis.',
+      khriz: 'Landing page y documentación',
+      darwin: 'Desarrollo de videojuego',
+      github_desc: 'Repositorio oficial del proyecto. Código abierto, contribuciones bienvenidas.',
       invite: '¿Quieres contribuir?',
       invite_desc: 'Project Nemesis es un proyecto abierto. Si eres desarrollador, diseñador o entusiasta de los juegos de pelea, tu ayuda es bienvenida.',
       invite_cta: 'CONTRIBUIR EN GITHUB'
@@ -323,7 +323,7 @@ const LANG = {
       title: 'FEATURED ALGORITHMS',
       items: [
         {
-          num: '01', title: 'PatternDetector — Profile Classification',
+          num: '01', icon: 'manage_search', title: 'PatternDetector (Profile Classification)',
           desc: 'Analyzes player behavior in real time and classifies it into tactical profiles: aggressive, defensive, balanced, unpredictable. Nemesis adjusts its base strategy based on the detected profile.',
           tags: [
             { label: 'Input', code: 'Player actions (last 5 seconds)' },
@@ -331,12 +331,12 @@ const LANG = {
           ]
         },
         {
-          num: '02', title: 'FrustrationRegulator — Dynamic Balance',
+          num: '02', icon: 'speed', title: 'FrustrationRegulator (Dynamic Balance)',
           desc: 'If the player loses repeatedly, Nemesis holds back to keep the experience challenging but fair.',
           table: { headers: ['Losses', '0-1', '2', '3', '4+'], values: ['Intensity', '1.0', '0.7', '0.5', '0.35'] }
         },
         {
-          num: '03', title: 'AdaptiveMomentum — Sliding Window',
+          num: '03', icon: 'trending_up', title: 'AdaptiveMomentum (Sliding Window)',
           desc: 'Monitors the last 40 player actions. If it detects tactic abuse, Nemesis increases its chance to counter or dodge.',
           tags: [
             { label: 'Threshold', code: 'momentum > 0.6 → AI prioritizes defense', highlight: true },
@@ -344,7 +344,7 @@ const LANG = {
           ]
         },
         {
-          num: '04', title: 'StatusEffect — Stack Policies',
+          num: '04', icon: 'layers', title: 'StatusEffect (Stack Policies)',
           desc: 'Three accumulation rules for buffs and debuffs that determine how status effects combine.',
           policies: [
             { name: 'Replace', desc: 'New effect replaces existing one only if its priority is higher or equal.' },
@@ -472,11 +472,11 @@ const LANG = {
     },
     community: {
       label: 'SECTION 12',
-      title: 'COMMUNITY & SOCIAL',
-      desc: 'Follow development, contribute to the code, and be part of Project Nemesis.',
-      repo_desc: 'Official project repository. Open source, contributions welcome.',
-      twitter_desc: 'Follow development in real time and be the first to know about updates.',
-      email_desc: 'Questions, suggestions, or just want to say hi? Write to us.',
+      title: 'COLLABORATORS',
+      desc: 'Meet the team behind Project Nemesis.',
+      khriz: 'Landing page and documentation',
+      darwin: 'Video game development',
+      github_desc: 'Official project repository. Open source, contributions welcome.',
       invite: 'Want to contribute?',
       invite_desc: 'Project Nemesis is an open project. If you are a developer, designer, or fighting game enthusiast, your help is welcome.',
       invite_cta: 'CONTRIBUTE ON GITHUB'
